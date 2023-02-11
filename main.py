@@ -9,7 +9,7 @@ from feedgen.feed import FeedGenerator
 from lxml.etree import CDATA
 
 MD_HEAD = """## Gitblog
-My personal blog using issues and GitHub Actions (随意转载，无需署名)
+My personal blog using issues and GitHub Actions
 [RSS Feed](https://raw.githubusercontent.com/{repo_name}/main/feed.xml)
 """
 
@@ -77,7 +77,7 @@ def _valid_xml_char_ordinal(c):
 
 
 def format_time(time):
-    return str(time)[:10]
+    return str(time)
 
 
 def login(token):
@@ -267,7 +267,7 @@ def main(token, repo_name, issue_number=None, dir_name=BACKUP_DIR):
     repo = get_repo(user, repo_name)
     # add to readme one by one, change order here
     add_md_header("README.md", repo_name)
-    for func in [add_md_firends, add_md_top, add_md_recent, add_md_label, add_md_todo]:
+    for func in [add_md_top, add_md_recent, add_md_label, add_md_todo]:
         func(repo, "README.md", me)
 
     generate_rss_feed(repo, "feed.xml", me)
